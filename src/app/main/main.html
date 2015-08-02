@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class='row'>
+        <div class='col-lg-2 col-md-4 col-sm-6 col-xs-8'>
+            <img class="img-responsive center-block logo" src="assets/images/logo.png" alt="Await">
+            <form ng-submit="create()">
+                <div class="form-group">
+                    <label>Date and time</label>
+                    <input class="form-control" ng-model="countdown.time" datetimepicker required>
+                </div>
+                <div class="form-group">
+                    <label>Text before</label>
+                    <input class="form-control" placeholder="Text before" ng-model="countdown.textBefore">
+                </div>
+                <div class="form-group">
+                    <label>Text after</label>
+                    <input class='form-control' placeholder="Text after" ng-model="countdown.textAfter">
+                </div>
+                <div class="form-group">
+                    <label>Theme</label>
+                    <select name="theme" class='form-control' placeholder="Pick a theme" ng-model="countdown.theme" ng-options="t for t in themes" required>
+                    </select>
+                </div>
+                <div class='form-group' ng-if="countdown.theme == 'trip'">
+                    <label>Origin</label>
+                    <input type="text" placeholder="Where does your trip start?" class="form-control" googleplace ng-model="countdown.cityOrigin" />
+                </div>
+                <div class="form-group" ng-if="countdown.theme == 'trip'">
+                    <label>Destination</label>
+                    <input type="text" placeholder="Where does your trip end?" class="form-control" googleplace ng-model="countdown.cityDestination" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">CREATE</button>
+            </form>
+        </div>
+        <div class="col-lg-10 col-md-8 col-sm-6 col-xs-4 no-padding" ng-style="style" fullheight>
+            <countdown-preview >{{ completeText }}</countdown-preview>
+            <tripmap ng-show="countdown.theme == 'trip'" origin="countdown.cityOrigin" destination="countdown.cityDestination"></tripmap>
+        </div>
+    </div>
+</div>
